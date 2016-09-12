@@ -30,6 +30,8 @@
 %\usepackage{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Required for accented characters
 \usepackage{libertine}
+\usepackage{multirow} % http://ctan.org/pkg/multirow
+\usepackage{hhline} % http://ctan.org/pkg/hhline
 %\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
 
 \makeatletter
@@ -95,46 +97,39 @@ A short period of NOvA RHC data was taken from June 30, 2016 to July 30, 2016. T
 
 Since then, the collaboration has achieved a great improvement in estimating the hadronic energy in the neutrino events, including the incorporation of the meson exchange current (MEC) model into the GENIE neutrino generator, a reduction in the rate of nonresonant single pion production, and a reassignment to the uncertainties for charged-current (CC) quasielastic scattering~\cite{Wolcott:2016_1}. However, even with these major improvements, issues still remain. There is still a $2.5\%$ shift in the reconstructed neutrino energy, and there are still data/MC discrepancies particularly in  high inelasticity, low muon track length situations. Antineutrino data, with different interaction cross section and inelasticity, could shed lights on these issues.
 
-Besides the impact on the oscillation analyses, investigations also show it is feasible to do a CC inclusive cross section measurement, even perhaps a double differential measurement with this small dataset. Since most modern long baseline neutrino oscillation experiments use $\nu_\mu/\bar{\nu}_\mu$ beam, the inclusive cross section measurement could contribute not only to NOvA, but also to the community. In addition, this measurement could serve as one the the first measurements in the energy region of NOvA on the global plot~\cite{Zeller:2015_1}. This measurement includes studies on event selection and its efficiency, neutrino flux, number of target nucleons, energy scale, background, unfolding, GENIE physics modeling, and corresponding uncertainties. Some of the items share results with the $\nu_\mu$ CC inclusive measurement, while others require independent studies.
+Besides the impact on the oscillation analyses, investigations also show it is feasible to do a CC inclusive cross section measurement, even perhaps a double differential measurement with this small dataset of the near detector data. Since most modern long baseline neutrino oscillation experiments use $\nu_\mu/\bar{\nu}_\mu$ beam, the inclusive cross section measurement could contribute not only to NOvA, but also to the community. In addition, this measurement could serve as one the the first measurements in the energy region of NOvA on the global plot~\cite{Zeller:2015_1}. This measurement includes studies on event selection and its efficiency, neutrino flux, number of target nucleons, energy scale, background, unfolding, GENIE physics modeling, and corresponding uncertainties. Some of the items share results with the $\nu_\mu$ CC inclusive measurement, while others require independent studies.
 
-GENIE physics modeling is particularly interesting among the items. There is evidence of 2p2h effects also in the RHC data~\cite{Bashar:2016_1}. A data/MC comparison shows the inclusion of MEC effect makes the MC agree with data very well for the forward horn current (FHC) data. However, the MEC effect cannot compensate the deficiency of RHC MC, especially at the visible hadronic energy close to zero. One of the speculations states the NOvA detectors might see neutrons, and methods for measuring and reconstructing neutrons are under investigation. Our group plans to take on this problem by looking at the event topology at the very low visible hadronic energy and see if any event topology in data but not in MC can be identified. MEC effects in other variables such as the invariant hadronic mass $W$ and the four-momentum transfer $Q$ will also be pursued.\newline
+GENIE physics modeling is particularly interesting among the items. There is evidence of 2p2h effects also in the RHC data~\cite{Bashar:2016_1}. A data/MC comparison shows the inclusion of MEC effect makes the MC agree with data very well for the forward horn current (FHC) data. However, the current MEC model for $\bar{\nu}_\mu$ cannot compensate the MC deficiency in RHC, especially at the visible hadronic energy close to zero. One of the speculations states the NOvA detectors might see neutrons, and methods for measuring and reconstructing neutrons are under investigation. Our group plans to take on this problem by looking at the event topology at the very low visible hadronic energy and see if any event topology in data but not in MC can be identified. MEC effects in other variables such as the invariant hadronic mass $W$ and the four-momentum transfer $Q$ will also be pursued.\newline
 
-My second goal is to manage the data driven trigger (DDT) software.
-%\section*{Introduction}
-%
-%This statement requires citation \cite{Smith:2012qr}; this one does too \cite{Smith:2013jd}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum lacus sem, ut varius ante dignissim ac. Sed a mi quis lectus feugiat aliquam. Nunc sed vulputate velit. Sed commodo metus vel felis semper, quis rutrum odio vulputate. Donec a elit porttitor, facilisis nisl sit amet, dignissim arcu. Vivamus accumsan pellentesque nulla at euismod. Duis porta rutrum sem, eu facilisis mi varius sed. Suspendisse potenti. Mauris rhoncus neque nisi, ut laoreet augue pretium luctus. Vestibulum sit amet luctus sem, luctus ultrices leo. Aenean vitae sem leo.
-%
-%Nullam semper quam at ante convallis posuere. Ut faucibus tellus ac massa luctus consectetur. Nulla pellentesque tortor et aliquam vehicula. Maecenas imperdiet euismod enim ut pharetra. Suspendisse pulvinar sapien vitae placerat pellentesque. Nulla facilisi. Aenean vitae nunc venenatis, vehicula neque in, congue ligula.
-%
-%Pellentesque quis neque fringilla, varius ligula quis, malesuada dolor. Aenean malesuada urna porta, condimentum nisl sed, scelerisque nisi. Suspendisse ac orci quis massa porta dignissim. Morbi sollicitudin, felis eget tristique laoreet, ante lacus pretium lacus, nec ornare sem lorem a velit. Pellentesque eu erat congue, ullamcorper ante ut, tristique turpis. Nam sodales mi sed nisl tincidunt vestibulum. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-%
-%%------------------------------------------------
-%
-%\section*{Section Name}
-%
-%Cras gravida, est vel interdum euismod, tortor mi lobortis mi, quis adipiscing elit lacus ut orci. Phasellus nec fringilla nisi, ut vestibulum neque. Aenean non risus eu nunc accumsan condimentum at sed ipsum.
-%%\begin{wrapfigure}{l}{0.4\textwidth} % Inline image example
-%%\begin{center}
-%%\includegraphics[width=0.38\textwidth]{fish.png}
-%%\end{center}
-%%\caption{Fish}
-%%\end{wrapfigure}
-%Aliquam fringilla non diam sed varius. Suspendisse tellus felis, hendrerit non bibendum ut, adipiscing vitae diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis purus eget nisl scelerisque, commodo rhoncus lacus porta. Vestibulum vitae turpis tincidunt, varius dolor in, dictum lectus. Aenean ac ornare augue, ac facilisis purus. Sed leo lorem, molestie sit amet fermentum id, suscipit ut sem. Vestibulum orci arcu, vehicula sed tortor id, ornare dapibus lorem. Praesent aliquet iaculis lacus nec fermentum. Morbi eleifend blandit dolor, pharetra hendrerit neque ornare vel. Nulla ornare, nisl eget imperdiet ornare, libero enim interdum mi, ut lobortis quam velit bibendum nibh.
-%
-%Morbi tempor congue porta. Proin semper, leo vitae faucibus dictum, metus mauris lacinia lorem, ac congue leo felis eu turpis. Sed nec nunc pellentesque, gravida eros at, porttitor ipsum. Praesent consequat urna a lacus lobortis ultrices eget ac metus. In tempus hendrerit rhoncus. Mauris dignissim turpis id sollicitudin lacinia. Praesent libero tellus, fringilla nec ullamcorper at, ultrices id nulla. Phasellus placerat a tellus a malesuada.
-%
-%%------------------------------------------------
-%
-%\section*{Conclusion}
-%
-%Fusce in nibh augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In dictum accumsan sapien, ut hendrerit nisi. Phasellus ut nulla mauris. Phasellus sagittis nec odio sed posuere. Vestibulum porttitor dolor quis suscipit bibendum. Mauris risus lectus, cursus vitae hendrerit posuere, congue ac est. Suspendisse commodo eu eros non cursus. Mauris ultrices venenatis dolor, sed aliquet odio tempor pellentesque. Duis ultricies, mauris id lobortis vulputate, tellus turpis eleifend elit, in gravida leo tortor ultricies est. Maecenas vitae ipsum at dui sodales condimentum a quis dui. Nam mi sapien, lobortis ac blandit eget, dignissim quis nunc.
-%
-%\begin{enumerate}
-%\item First numbered list item
-%\item Second numbered list item
-%\end{enumerate}
-%
-%Donec luctus tincidunt mauris, non ultrices ligula aliquam id. Sed varius, magna a faucibus congue, arcu tellus pellentesque nisl, vel laoreet magna eros et magna. Vivamus lobortis elit eu dignissim ultrices. Fusce erat nulla, ornare at dolor quis, rhoncus venenatis velit. Donec sed elit mi. Sed semper tellus a convallis viverra. Maecenas mi lorem, placerat sit amet sem quis, adipiscing tincidunt turpis. Cras a urna et tellus dictum eleifend. Fusce dignissim lectus risus, in bibendum tortor lacinia interdum.
+My second goal is to manage the data driven trigger (DDT) software. One of the innovative features of NOvA's data acquisition (DAQ) is that the detectors operate in a trigger-less mode, continuously sending data to the buffer nodes with capacity of at least $\sim 20$ s worth of data. The system then waits for the information of the beam spill to arrive and makes trigger decisions. Keeping tens of seconds of data in the buffer node farm opens up the capability of searching for interesting events not associated with the beam pulses. This kind of trigger is NOvA's DDT.
+
+So far the DDT codebase is managed in a per package manner, meaning the individual author of the packages takes the responsibility that his or her code builds and takes sensible data. However, past experience shows this way sometimes leads to code redundancy, such as a same reconstruction algorithm being implemented in different packages. Besides, the lack of validation procedures also resulted in nonsensical data. The DDT group has come up with the idea of cleaning up the DDT codebase, making it more modular, and having a person to watch over the consistency between packages and tag releases. Also, the developers are requested to follow a validation procedure before deployment, and a person will be supervising this process. I am taking this role as the code manager. Furthermore, since the current DDT uses multi release build (MRB) as its build system, which leads to inconsistency between the online and the offline DDT builds, the DAQ and the DDT group plan to migrate the build system back to the older SRT. I will also be working on this together with people from DAQ and DDT group.\newline
+
+Office space with a computer for code development and software for data analysis are readily accessible. I am looking at a funding of \$\underline{\hspace{2cm}}.
+\clearpage
+
+\paragraph{\textbf{Proposed Timeline}}\hspace*{\fill}\\
+
+\begin{table}[!htbp]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    time & $\bar{\nu}_\mu$ interaction \& cross section & \multicolumn{2}{c|}{DDT} \\
+    \hline
+    2 weeks & event selection \& efficiency & \multirow{5}{*}{code management} & \multirow{3}{*}{SRT transition} \\
+    \hhline{--~~}
+    2 weeks & neutrino flux, target nucleons & & \\
+    \hhline{--~~}
+    4 weeks & systematic uncertainties & & \\
+    \hhline{--~-}
+    4 weeks & background & & \\
+    \hhline{--~}
+    12 weeks & MEC for RHC, energy scale & & \\
+	\hline
+  \end{tabular}
+  %\caption{R, C ripple size}
+  \label{T:peak}
+\end{table}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
