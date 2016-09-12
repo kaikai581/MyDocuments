@@ -25,6 +25,7 @@
 %\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
 \usepackage{graphicx} % Required for including pictures
 \usepackage{wrapfig} % Allows in-line images
+\usepackage{hyperref} % Enable URL
 
 %\usepackage{mathpazo} % Use the Palatino font
 \usepackage[T1]{fontenc} % Required for accented characters
@@ -85,10 +86,20 @@
 %	ESSAY BODY
 %----------------------------------------------------------------------------------------
 \paragraph{\textbf{Title}}\hspace*{\fill}\\
-Study of muon antineutrino charged-current interactions and data driven trigger management on NOvA
+Study of muon antineutrino charged-current interactions and management of data driven trigger for NOvA
 
 \paragraph{}\hspace*{\fill}\\
 My research has two goals. The first goal is to study the muon antineutrino interactions with the NOvA reversed horn current (RHC) data taken right before the 2016 summer shutdown of the neutrino beam.
+
+A short period of NOvA RHC data was taken from June 30, 2016 to July 30, 2016. The purpose of this dataset is to give information for NOvA's Monte Carlo tuning and physics modeling~\cite{Patterson:2016_1}. NOvA's neutrino beam energy, which is tuned for long baseline oscillation measurements, sits on an intricate energy range where all the major neutrino-nucleus interaction modes, namely quasielastic, resonant production, and deep inelastic scattering, have a significant contribution to the total cross section. In analyzing the $\nu_\mu$ data, the collaboration found there were significant deficiencies in the Monte Carlo compared with data, and these deficiencies led to large systematic uncertainties in NOvA's first oscillation analyses~\cite{NOvA:2016_1}~\cite{NOvA:2016_2}.
+
+Since then, the collaboration has achieved a great improvement in estimating the hadronic energy in the neutrino events, including the incorporation of the meson exchange current (MEC) model into the GENIE neutrino generator, a reduction in the rate of nonresonant single pion production, and a reassignment to the uncertainties for charged-current (CC) quasielastic scattering~\cite{Wolcott:2016_1}. However, even with these major improvements, issues still remain. There is still a $2.5\%$ shift in the reconstructed neutrino energy, and there are still data/MC discrepancies particularly in  high inelasticity, low muon track length situations. Antineutrino data, with different interaction cross section and inelasticity, could shed lights on these issues.
+
+Besides the impact on the oscillation analyses, investigations also show it is feasible to do a CC inclusive cross section measurement, even perhaps a double differential measurement with this small dataset. Since most modern long baseline neutrino oscillation experiments use $\nu_\mu/\bar{\nu}_\mu$ beam, the inclusive cross section measurement could contribute not only to NOvA, but also to the community. In addition, this measurement could serve as one the the first measurements in the energy region of NOvA on the global plot~\cite{Zeller:2015_1}. This measurement includes studies on event selection and its efficiency, neutrino flux, number of target nucleons, energy scale, background, unfolding, GENIE physics modeling, and corresponding uncertainties. Some of the items share results with the $\nu_\mu$ CC inclusive measurement, while others require independent studies.
+
+GENIE physics modeling is particularly interesting among the items. There is evidence of 2p2h effects also in the RHC data~\cite{Bashar:2016_1}. A data/MC comparison shows the inclusion of MEC effect makes the MC agree with data very well for the forward horn current (FHC) data. However, the MEC effect cannot compensate the deficiency of RHC MC, especially at the visible hadronic energy close to zero. One of the speculations states the NOvA detectors might see neutrons, and methods for measuring and reconstructing neutrons are under investigation. Our group plans to take on this problem by looking at the event topology at the very low visible hadronic energy and see if any event topology in data but not in MC can be identified. MEC effects in other variables such as the invariant hadronic mass $W$ and the four-momentum transfer $Q$ will also be pursued.\newline
+
+My second goal is to manage the data driven trigger (DDT) software.
 %\section*{Introduction}
 %
 %This statement requires citation \cite{Smith:2012qr}; this one does too \cite{Smith:2013jd}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean dictum lacus sem, ut varius ante dignissim ac. Sed a mi quis lectus feugiat aliquam. Nunc sed vulputate velit. Sed commodo metus vel felis semper, quis rutrum odio vulputate. Donec a elit porttitor, facilisis nisl sit amet, dignissim arcu. Vivamus accumsan pellentesque nulla at euismod. Duis porta rutrum sem, eu facilisis mi varius sed. Suspendisse potenti. Mauris rhoncus neque nisi, ut laoreet augue pretium luctus. Vestibulum sit amet luctus sem, luctus ultrices leo. Aenean vitae sem leo.
