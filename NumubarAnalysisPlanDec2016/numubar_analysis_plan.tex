@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    INSTITUTE OF PHYSICS PUBLISHING                                   %
+%                                                                      %
+%   `Preparing an article for publication in an Institute of Physics   %
+%    Publishing journal using LaTeX'                                   %
+%                                                                      %
+%    LaTeX source code `ioplau2e.tex' used to generate `author         %
+%    guidelines', the documentation explaining and demonstrating use   %
+%    of the Institute of Physics Publishing LaTeX preprint files       %
+%    `iopart.cls, iopart12.clo and iopart10.clo'.                      %
+%                                                                      %
+%    `ioplau2e.tex' itself uses LaTeX with `iopart.cls'                %
+%                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% First we have a character check
+%
+% ! exclamation mark    " double quote  
+% # hash                ` opening quote (grave)
+% & ampersand           ' closing quote (acute)
+% $ dollar              % percent       
+% ( open parenthesis    ) close paren.  
+% - hyphen              = equals sign
+% | vertical bar        ~ tilde         
+% @ at sign             _ underscore
+% { open curly brace    } close curly   
+% [ open square         ] close square bracket
+% + plus sign           ; semi-colon    
+% * asterisk            : colon
+% < open angle bracket  > close angle   
+% , comma               . full stop
+% ? question mark       / forward slash 
+% \ backslash           ^ circumflex
+%
+% ABCDEFGHIJKLMNOPQRSTUVWXYZ 
+% abcdefghijklmnopqrstuvwxyz 
+% 1234567890
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\documentclass[12pt,a4paper,final]{iopart}
+\usepackage[letterpaper]{geometry}
+\newcommand{\gguide}{{\it Preparing graphics for IOP journals}}
+%Uncomment next line if AMS fonts required
+\usepackage{iopams}  
+\usepackage{graphicx}
+\usepackage[breaklinks=true,colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+%\usepackage[T1]{fontenc}
+%\usepackage{alltt}
+%\usepackage{underscore}
+
+%% Choose Font %%
+%\usepackage{fontspec}
+%\setmainfont{Fontin}
+\usepackage{libertine}
+\usepackage{graphicx}
+
+\usepackage[colorlinks=true]{hyperref}
+
+\begin{document}
+
+\title[numubarcc inclusive cross section measurement]{Plan for $\bar{\nu}_\mu$ CC inclusive cross section measurement}
+	
+\author[cor1]{Shih-Kai Lin}
+\address{Colorado State University}
+\ead{\mailto{Shihkai.Lin@colostate.edu}}
+
+
+%\begin{abstract}
+%This document describes the  preparation of an article using \LaTeXe\ and 
+%\verb"iopart.cls" (the IOP \LaTeXe\ preprint class file).
+%This class file is designed to help 
+%authors produce preprints in a form suitable for submission to any of the
+%journals published by IOP Publishing.
+%Authors submitting to any IOP journal, i.e.\ 
+%both single- and double-column ones, should follow the guidelines set out here. 
+%On acceptance, their TeX code will be converted to 
+%the appropriate format for the journal concerned.
+%
+%\end{abstract}
+
+%Uncomment for PACS numbers title message
+%\pacs{00.00, 20.00, 42.10}
+% Keywords required only for MST, PB, PMB, PM, JOA, JOB? 
+%\vspace{2pc}
+%\noindent{\it Keywords}: Article preparation, IOP journals
+% Uncomment for Submitted to journal title message
+%\submitto{\JPA}
+% Comment out if separate title page not required
+%\maketitle
+
+\vspace{\baselineskip}
+This document outlines the steps towards a $\bar{\nu}_\mu$ CC inclusive measurement and gives an estimate of the time needed.
+
+%\tableofcontents
+
+\section{Overview}
+This analysis will be done with the CAFAna framework, with the possibility of resorting to art, if the current information included in CAF does not suffice for studying neutrons, which are crucial for estimating the neutrino energy for RHC.
+
+\section{Outline}
+
+\subsection{Determine the Data and MC Samples to Use}
+\begin{enumerate}
+  \item The data used for this analysis is without question to be the sort RHC datasets taken right before the 2016 summer shutdown.\\
+  The SAM definition is \begin{small}\path{prod_caf_S16-08-04_nd_numi_rhc_epoch4a_v1_goodruns}\end{small}.
+  \item Real condition MC will be used. There are two production MC datasets available as of now.
+  \begin{footnotesize}
+    \begin{enumerate}
+      \item \path{prod_caf_R16-03-03-prod2reco.h_nd_genie_nonswap_genierw_rhc_nova_v08_epoch4a_v1}
+      \item \path{prod_caf_R16-03-03-prod2reco.h_nd_genie_nonswap_genierw_rhc_nova_v08_epoch4a_v1_neutron-hp-fix}
+    \end{enumerate}
+  \end{footnotesize}
+  The difference between the two is that the second dataset uses the Geant4 high precision neutron model. At this moment the high precision one is used.
+\end{enumerate}
+
+\subsection{Event Selection}
+The standard quality cut \texttt{kNumuQuality} and containment cut \texttt{kNumuContainND} perform well and will be retained. The standard PID \texttt{remid.pid>0.75} was optimized for oscillation analyses and will be replaced by \texttt{remid.pid>0.29}, an optimal value for cross section measurements.
+
+\subsection{Background Estimation}
+\begin{itemize}
+  \item Relative proportions of background channels coming from $\nu_\mu$, $\nu_e$, $\bar{\nu}_e$, and NC are obtained with MC.
+  \item The overall normalization factor will be estimated by the sideband method.
+\end{itemize}
+
+\subsection{Flux Predictions}
+The nominal Dk2Nu flux files are used, and a comparison with the PPFX flux files will be made.
+
+\subsection{Unfolding}
+The unfolding procedure is very actively developed for $\nu_\mu$ CC inclusive measurement. Once the machinery is done, it should be able to apply directly to the $\bar{\nu}_\mu$ case.
+
+\subsection{Systematic Uncertainties}
+Each of the following items has a systematic uncertainty associated with it.
+\begin{itemize}
+  \item event selection efficiency
+  \item background
+  \item flux
+  \item unfolding
+  \item GENIE
+\end{itemize}
+
+\subsection{Constraint on Wrong Sign Contamination}
+
+
+%\section*{References}
+%\begin{thebibliography}{10}
+%\bibitem{ref1} J.~Doe, Article name, \textit{Phys. Rev. Lett.}
+%
+%\bibitem{ref2} J.~Doe, J. Smith, Other article name, \textit{Phys. Rev. Lett.}
+%
+%\bibitem{web} \href{http://www.google.pl}{www.google.pl}
+%\end{thebibliography}
+
+\end{document}
+
