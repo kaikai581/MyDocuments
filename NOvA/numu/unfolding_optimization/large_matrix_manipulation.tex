@@ -241,9 +241,17 @@ Bottom line: $\mathbf{V}_{jj}\mathbf{V}^{+}_{jj} \ge 1$ is true for all $j$ only
 \end{frame}
 
 \begin{frame}{Removing Zero Rows and Columns Does Not Help!}
-  \begin{center}
-    \includegraphics[height=.6\textheight]{figures/iter2tol1e-15.png}
-  \end{center}
+%  \begin{center}
+%    \includegraphics[height=.6\textheight]{figures/iter2tol1e-15.png}
+%  \end{center}
+  \begin{columns}
+    \begin{column}{.68\textwidth}
+      \includegraphics[width=\textwidth]{figures/iter2tol1e-15.png}
+    \end{column}
+    \begin{column}{.32\textwidth}
+      \includegraphics[width=\textwidth]{figures/collinearity.pdf}
+    \end{column}
+  \end{columns}
   \begin{itemize}
     \scriptsize
     \item Plots are with 2 iterations. Similar situation applies to all iterations.
