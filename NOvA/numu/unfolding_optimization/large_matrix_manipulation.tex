@@ -90,11 +90,10 @@
 
 \begin{frame}{Overview}
   \begin{itemize}
-    \item Currently, the number of iterations we use for unfolding was optimized in 1D neutrino energy only, but not in the full 3D $(\cos\theta_\mu,T_\mu,E_\nu)$ space.
-    \item I have been trying to optimize the number of iterations for iterative unfolding in the full 3D space.
-    \item In this study, RooUnfold is used to calculate the covariance matrix between bins.
-    \item The total number of bins in $(\cos\theta_\mu,T_\mu,E_\nu)$ is $14\times 22\times 22=6776$. As a result, the covariance matrix is of size $6776\times 6776$.
-    \item It turns out large matrices are hard to manipulate numerically. 
+    \item I have been dealing with covariance matrices of size $6776\times 6776$ for optimizing the number of iterations in iterative unfolding.
+    \item In this study, RooUnfold is used to calculate the covariance matrix.
+    \item Matrix manipulation is done with \texttt{PyROOT}, \texttt{root\_numpy}, and \texttt{numpy.linalg}.
+    \item It turns out large matrices are hard to manipulate numerically.
   \end{itemize}
   \bigskip
   \centering
