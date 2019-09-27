@@ -64,6 +64,34 @@
 \titlepage
 \end{frame}
 
+\begin{frame}{Recap}
+  \begin{itemize}
+    \item The standard metric in the ND group used by all analyses requiring unfolding is the average global correlation coefficient\footnote[frame]{Stefan Schmitt, ``Data Unfolding Methods in High Energy Physics''},
+      \begin{equation} \label{eq:1}
+        \rho_{avg}=\frac{1}{M}\sum_{j=1}^{M}\sqrt{1-\frac{1}{\pmb{V}_{jj}(\pmb{V}^{-1})_{jj}}}
+      \end{equation}
+    , where $M$ is the number of bins and $\pmb{V}$ is the covariance matrix in true space inferred by the unfolding algorithm.
+    \item For analyses with tens of bins, this is a convenient metric. However, for an analysis with thousands of bins, this metric turned out to be infeasible.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Infeasibility of Average Global Correlation Coefficient for Many-Bin Analyses}
+  \begin{columns}
+    \begin{column}{.65\textwidth}
+    Inverting a covariance matrix this large turns out to be very tricky.
+    \begin{itemize}
+      \item The covariance matrices all have astronomical \textcolor{red}{condition numbers} (i.e., ill-conditioned or nearly singular).
+      \item Numerical inversion is still possible but subject to an arbitrary, small cut-off number, or tolerance, brought into play by SVD.
+      \item Forcefully getting the calculation through results in numerical instability, such as negative values in square root in Eq.~\ref{eq:1}. Removing unphysical values, results are shown to the right. No clear minimum is observed.
+    \end{itemize}
+    \end{column}
+    \begin{column}{.35\textwidth}
+      \includegraphics[width=\textwidth]{figures/cov_mat_iter20.png} \\
+      \includegraphics[width=\textwidth]{figures/avg_rho.eps}
+    \end{column}
+  \end{columns}
+\end{frame}
+
 \begin{frame}{Reference}
   \begin{columns}
     \begin{column}{.5\textwidth}
