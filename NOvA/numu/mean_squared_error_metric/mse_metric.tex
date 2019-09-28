@@ -64,6 +64,7 @@
 \titlepage
 \end{frame}
 
+%================================================================================
 \begin{frame}{Recap}
   \begin{itemize}
     \item The standard metric in the ND group used by all analyses requiring unfolding is the average global correlation coefficient\footnote[frame]{Stefan Schmitt, ``Data Unfolding Methods in High Energy Physics''},
@@ -75,6 +76,7 @@
   \end{itemize}
 \end{frame}
 
+%================================================================================
 \begin{frame}{Infeasibility of Average Global Correlation Coefficient for Many-Bin Analyses}
   \begin{columns}
     \begin{column}{.65\textwidth}
@@ -92,6 +94,23 @@
   \end{columns}
 \end{frame}
 
+%================================================================================
+\begin{frame}{A Simple Alternative Metric: Mean Squared Error}
+	Suppose $\theta$ is the a true parameter to be estimated, and $\hat{\theta}$ is an estimator of the parameter.
+	The mean squared error (MSE) can be decomposed into a sum of variance and bias squared.
+	\begin{eqnarray} \label{eq:2}
+	MSE &=& E[(\hat{\theta}-\theta)^2]\nonumber\\
+	&=& E[\hat{\theta}^2-2\hat{\theta}\theta+\theta^2] = E[\hat{\theta}^2] -2\theta E[\hat{\theta}]+\theta^2 \nonumber\\
+	&=& (E[\hat{\theta}^2]-E[\hat{\theta}]^2)+(E[\hat{\theta}]^2-2\theta E[\hat{\theta}]+\theta^2) \nonumber\\
+	&=& V[\hat{\theta}]+b^2
+	\end{eqnarray}
+	, where $b=E[\hat{\theta}]-\theta$ is the bias of the estimator.\\
+	Equation~\ref{eq:2} is called bias-variance decomposition.
+	\vfill
+	This is a very common metric in statistics and machine learning as well.
+\end{frame}
+
+%================================================================================
 \begin{frame}{Reference}
   \begin{columns}
     \begin{column}{.5\textwidth}
