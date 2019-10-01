@@ -96,18 +96,104 @@
 
 %================================================================================
 \begin{frame}{A Simple Alternative Metric: Mean Squared Error}
-	Suppose $\theta$ is the a true parameter to be estimated, and $\hat{\theta}$ is an estimator of the parameter.
-	The mean squared error (MSE) can be decomposed into a sum of variance and bias squared.
-	\begin{eqnarray} \label{eq:2}
-	MSE &=& E[(\hat{\theta}-\theta)^2]\nonumber\\
-	&=& E[\hat{\theta}^2-2\hat{\theta}\theta+\theta^2] = E[\hat{\theta}^2] -2\theta E[\hat{\theta}]+\theta^2 \nonumber\\
-	&=& (E[\hat{\theta}^2]-E[\hat{\theta}]^2)+(E[\hat{\theta}]^2-2\theta E[\hat{\theta}]+\theta^2) \nonumber\\
-	&=& V[\hat{\theta}]+b^2
-	\end{eqnarray}
-	, where $b=E[\hat{\theta}]-\theta$ is the bias of the estimator.\\
-	Equation~\ref{eq:2} is called bias-variance decomposition.
-	\vfill
-	This is a very common metric in statistics and machine learning as well.
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \footnotesize
+			Suppose $\theta$ is the a true parameter to be estimated, and $\hat{\theta}$ is an estimator of the parameter.
+			The mean squared error (MSE) can be decomposed into a sum of variance and bias squared.
+			\begin{eqnarray} \label{eq:2}
+			MSE &=& E[(\hat{\theta}-\theta)^2]\nonumber\\
+			&=& E[\hat{\theta}^2-2\hat{\theta}\theta+\theta^2] = E[\hat{\theta}^2] -2\theta E[\hat{\theta}]+\theta^2 \nonumber\\
+			&=& (E[\hat{\theta}^2]-E[\hat{\theta}]^2)+(E[\hat{\theta}]^2-2\theta E[\hat{\theta}]+\theta^2) \nonumber\\
+			&=& V[\hat{\theta}]+b^2
+			\end{eqnarray}
+			, where $b=E[\hat{\theta}]-\theta$ is the bias of the estimator.\\
+			Equation~\ref{eq:2} is called bias-variance decomposition.
+			\vfill
+			This is a very common metric in statistics and machine learning as well.
+	\end{column}
+    \begin{column}{.5\textwidth}
+      \includegraphics[width=\textwidth]{figures/mse_illustration_iter20.pdf}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%================================================================================
+\begin{frame}{Mean Squared Error in the Context of Unfolding}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \footnotesize
+				Given a true histogram $\pmb{\mu}=(\mu_1,...,\mu_M)$, where $\mu_i$'s are true counts in the $i$-th bin, $i=1,...,M$, unfolding can be viewed as a procedure that outputs a vector of estimators for the bin counts $\pmb{\hat{\mu}}=(\hat{\mu}_1,...,\hat{\mu}_M)$.
+				
+				Denoting the mean squared error for the $i$-th bin $MSE_i$, MSE for the histogram can be defined as
+				\begin{eqnarray}
+				  MSE &=& \frac{1}{M}\sum_{i=1}^M MSE_i \nonumber\\
+				  &=& \frac{1}{M}\sum_{i=1}^M V_{ii}+\hat{b}_i^2
+				\end{eqnarray}
+				, where $V_{ii}=cov[\hat{\mu}_i,\hat{\mu}_i]$ and $\hat{b}_i$ is an estimator of $E[\hat{\mu}_i]-\mu_i$.
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \footnotesize
+			Very often one wants to estimate more accurately bins with smaller absolute statistical uncertainties. In this case, weighted MSE can be used:
+			\begin{eqnarray}
+			  weighted \quad MSE &=& \frac{1}{M}\sum_{i=1}^M \frac{MSE_i}{\hat{\mu}_i} \nonumber\\
+			  &=& \frac{1}{M}\sum_{i=1}^M \frac{V_{ii}+\hat{b}_i^2}{\hat{\mu}_i}
+			\end{eqnarray}
+			In this study, a minimum bin count is required to satisfy Poisson statistics, and is compared to the result without count constraint.
+		\end{column}
+	\end{columns}
+\end{frame}
+
+%================================================================================
+\begin{frame}{Accessing MSE with Toy Monte Carlo}
+  \begin{enumerate}
+    \item Take the true spectrum. Generate 100 pseudo experiments by fluctuating each bin by Poisson with the true bin count as the parameter, i.e., average value.
+    \item Smear each experiment by applying the normalized migration matrix to the true spectrum.
+      \begin{equation}
+        \nu_i=\sum_j\left(\frac{A_{ij}}{\sum_i A_{ij}}\right)\mu_j
+      \end{equation}
+      , where $\nu_i$ is the reco spectrum and $\mu_j$ is the true spectrum.
+    \item Unfold each spectrum by a certain number of iterations.
+    \item For each iteration, calculate MSE with the 100 spectra. Find the number of iterations with a minimum MSE.
+  \end{enumerate}
+\end{frame}
+
+%================================================================================
+\begin{frame}{Why My First Attempt Did Not Work Out}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+    \begin{itemize}
+      \footnotesize
+      \item My first try led to exceedingly large bias, washing out the variance term completely.
+      \item All ND analyzers have been using the ``migration matrix'' obtained by \texttt{CAFAna} directly. My first attempt used the ``normalized'' migration matrix instead, resulting in large unfolded counts at bins with almost no counts in true space.
+        \begin{equation*}
+          B_{ij}=\frac{A_{ij}}{\sum_i A_{ij}}
+        \end{equation*}
+      \item I used the raw ``migration matrix'' in my second attempt and got the same results as others. Probably double counting somewhere.
+    \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \includegraphics[width=\textwidth]{figures/unfolded_old_new_comparison.eps}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%================================================================================
+\begin{frame}{Results: Unweighted MSE}
+  \centering
+  \includegraphics[height=\textheight]{figures/mse_vs_iter.pdf}
+\end{frame}
+
+%================================================================================
+\begin{frame}{Results: Weighted MSE}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \includegraphics[width=\textwidth]{figures/mse_vs_iter_true_weighted_mincnt_0.pdf}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \includegraphics[width=\textwidth]{figures/mse_vs_iter_true_weighted_mincnt_100.pdf}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 %================================================================================
