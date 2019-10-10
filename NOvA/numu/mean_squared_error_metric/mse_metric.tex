@@ -47,7 +47,7 @@
 \end{textblock*}}
 
 \title{Iterative Unfolding Optimization with the Mean Squared Error Metric}
-\date[today]{Finding-numu Meeting\\ \today}
+\date[today]{ND Working Group\\ NOvA Collaboration Meeting @ Fermilab\\ \today}
 \author{Shih-Kai Lin}
 \institute{Colorado State University}
 \usepackage{multicol} % 
@@ -77,14 +77,38 @@
 \end{frame}
 
 %================================================================================
+\begin{frame}{Meaning of Average Global Correlation Coefficient}
+  \begin{columns}
+    \begin{column}{.4\textwidth}
+      \centering
+      \includegraphics[height=\textheight]{figures/james_book.jpg}
+    \end{column}
+    \begin{column}{.6\textwidth}
+      \small
+      From the book by the authors of MINUIT, p.27:\\
+      \noindent\fbox{%
+        \parbox{\textwidth}{%
+      ``Consider the correlation $\rho(X_k,Y)$ between the variable $X_k$ and every possible linear combination $Y$ of all the other variables $X_i$, $i\neq k$. A useful quantity is the \textit{global correlation coefficient} $\rho_k$, defined as the largest value of $\rho(X_k,Y)$. This quantity is a measure of the total amount of correlation between $X_k$ and all the other variables.''
+        }%
+      }\\
+      \vspace{\baselineskip}
+      In unfolding's context, it says ``I want the bin-averaged maximum possible bin-to-bin correlation to be as small as possible.''\\
+      This is intuitively what ``unsmearing" means.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+%================================================================================
 \begin{frame}{Infeasibility of Average Global Correlation Coefficient for Many-Bin Analyses}
   \begin{columns}
     \begin{column}{.65\textwidth}
     Inverting a covariance matrix this large turns out to be very tricky.
     \begin{itemize}
+      \small
       \item The covariance matrices all have astronomical \textcolor{red}{condition numbers} (i.e., ill-conditioned or nearly singular).
       \item Numerical inversion is still possible but subject to an arbitrary, small cut-off number, or tolerance, brought into play by SVD.
       \item Forcefully getting the calculation through results in numerical instability, such as negative values in square root in Eq.~\ref{eq:1}. Removing unphysical values, results are shown to the right. No clear minimum is observed.
+      \item Last week I learned from Travis that even though the matrix is well-conditioned, a minimum is not guaranteed.
     \end{itemize}
     \end{column}
     \begin{column}{.35\textwidth}
@@ -145,14 +169,16 @@
 \end{frame}
 
 %================================================================================
-\begin{frame}{Accessing MSE with Toy Monte Carlo}
+\begin{frame}{Accessing MSE with Toy Monte Carlo}  
+  If I had 100 statistically independent reco MC spectra, I could have started with step 3. Since I don't, I do:
   \begin{enumerate}
+    \small
     \item Take the true spectrum. Generate 100 pseudo experiments by fluctuating each bin by Poisson with the true bin count as the parameter, i.e., average value.
     \item Smear each experiment by applying the normalized migration matrix to the true spectrum.
       \begin{equation}
         \nu_i=\sum_j\left(\frac{A_{ij}}{\sum_i A_{ij}}\right)\mu_j
       \end{equation}
-      , where $\nu_i$ is the reco spectrum and $\mu_j$ is the true spectrum.
+      , where $\nu_i$ is the reco spectrum, $\mu_j$ is the true spectrum, and $A_{ij}$ is the migration matrix from \texttt{CAFAna}.
     \item Unfold each spectrum by a certain number of iterations.
     \item For each iteration, calculate MSE with the 100 spectra. Find the number of iterations with a minimum MSE.
   \end{enumerate}
@@ -233,9 +259,28 @@
 \end{frame}
 
 %================================================================================
+\begin{frame}{Observations}
+  \begin{itemize}
+    \item Iterative unfolding converges very quickly for all analyses we have seen so far. Hundreds of iterations might be out of the question.
+    \item The central values of pseudo-experiments move towards the true values with the number of iterations at the expense of the spreads.
+    \item A fun fact: \texttt{RooUnfold}'s iterative unfolding strictly preserves the total number of events for a given input, regardless of the iterations. This is not true for some other algorithms, e.g. \texttt{TUnfold}.
+  \end{itemize}
+\end{frame}
+
+%================================================================================
 \begin{frame}{Results: Unweighted MSE}
-  \centering
-  \includegraphics[height=\textheight]{figures/mse_vs_iter.pdf}
+  \begin{columns}
+    \begin{column}{.5\textwidth}
+      \centering
+      Full Available Range
+      \includegraphics[width=\textwidth]{figures/mse_vs_iter.pdf}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \centering
+      Zoom In
+      \includegraphics[width=\textwidth]{figures/mse_vs_iter_iterlim20_grid.pdf}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 %================================================================================
@@ -261,6 +306,18 @@
       \includegraphics[height=\textheight]{figures/cowan_front_cover.jpeg}
     \end{column}
   \end{columns}
+\end{frame}
+
+%================================================================================
+\begin{frame}{Conclusion}
+Below I only talk about unweighted MSE.
+  \begin{itemize}
+    \item If you have a well-conditioned covariance matrix, the average global correlation coefficient might be the metric to go, since \texttt{RooUnfold} gives you the covariance matrix along the way.
+    \item Mean squared error is a generic and conceptually simple metric. It is just much more work.
+    \item For $\nu_\mu$ CC inclusive analysis, the curve is very flat around the minimum. Moving slightly away from the minimum of this study should have a negligible effect.\\
+    Crude estimate: (score(3)$^{1/2}$-score(6)$^{1/2}$)/average\_bin\_count \\
+    $(\sqrt{266.87}-\sqrt{261.33})/314.29=0.05\%$ difference in relative error!
+  \end{itemize}
 \end{frame}
 
 %\begin{frame}{Mean Squared Error \& \\Bias-Variance Decomposition}
