@@ -1,0 +1,49 @@
+\documentclass[]{report}   % list options between brackets
+\usepackage{}              % list packages between braces
+\usepackage{bm}
+\usepackage{crimson}
+\usepackage[margin=1in]{geometry}
+
+% type user-defined commands here
+
+\begin{document}
+
+\section*{Run Coordinating}
+I stepped down from run coordinator in March, 2019. The POT-weighted detector uptime when I was on duty is 99.02\% for Far Detector and 98.47\% for Near Detector.
+
+\section*{DDT art2 Upgrade}
+The major achievement this year is to migrate the whole DDT software to the art2 framework. Gavin initiated this work by helping the DDT group build the software against art2. I then took the built software, solved all runtime issues, and successfully migrated DDT to art2. The DAQ system is at the moment running with DDT art2.
+
+The runtime issues include, for example, a complete code review of the whole 50,000 lines of code to make the code conform to a backward incompatible change made in the newer art version, database runtime error due to different behavior of the new compiler, and adapting the DDT scripts to set up the runtime environment required by art2. I worked with Gennadiy from the computing division and Andrey closely to make sure DDS can still work with the new compiler.
+
+Things work out successfully.
+
+\section*{Leading the DDT Group}
+I have been serving as the DDT convener since May, 2019. I have held meetings for summer work, supporting the DAQ and operations groups, and talking about new trigger ideas from the exotics group.
+
+\section*{$\nu_\mu$ Charged-Current Inclusive Analysis}
+I played a major role in the February box opening event for this analysis. I was the one who produced the systematics plots, the generator overlay plots, and wrote the interface CAFAna script for running on NERSC.
+
+Later my focus shifted to unfolding. First, the RooUnfold package at NOvA's disposal was compiled and packaged by me with help from Liudmila, Evan, and Gavin. The conveners decided to adopt RooUnfold instead of CAFAnaUnfold because RooUnfold is like the ``industry standard'' for cross-section analyses. Then we found that we never optimize the number of iteration in the 3D phase space of our analyses. So we decided to re-optimize it. It turned out that this is a non-trivial task. The common metric used is the average global correlation coefficient,
+\begin{equation}
+  \rho_{avg}=\frac{1}{N}\sum_{j=1}^N \sqrt{1-(\bm{V}_{jj}(\bm{V}^{-1})_{jj})^{-1}}
+\end{equation}
+, where $\bm{V}$ is the covariance matrix of the unfolded spectra. However, it turns out that this coveriance matrix is highly nearly singular for a $3000\times 3000$ matrix, and inverting it naively introduces numerical instability inevitably.
+
+I introduced an alternative metric to the optimization task, the Mean Squared Error (MSE),
+\begin{equation}
+  MSE=\frac{1}{MN}\sum_{i=1}^M \sum_{j=1}^N (\hat{n}_{ij}-n^{true}_j)^2
+\end{equation}
+, where $\hat{n}_{ij}$ is the count in the $j$-th bin of the unfolded spectrum of the $i$-th instance in a Poisson-fluctuated ensemble of spectra, and $n^{true}_j$ is the count in the $j$-th bin of the MC spectrum.
+
+This metric is simple, and well-behaved in all situations. Other ND analyses start to use this metric as the alternative when the default metric is unstable or does not show a minimum at all.
+
+\section*{Conference Talks}
+\begin{itemize}
+  \item APS April Meeting 2019, April 15, 2019 \\
+        $\nu_\mu$ Charged-Current Inclusive Cross-Section Measurement in the NOvA Near Detector
+  \item SUSY2019, May 21, 2019 \\
+        Neutrino Cross-Section Measurements in the NOvA Near Detector at Fermilab
+\end{itemize}
+
+\end{document}
